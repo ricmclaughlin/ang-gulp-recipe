@@ -2,8 +2,13 @@
 
 In the quest to build the ultimate Angular Gulpfile I worked through a couple of gulp classes and then set out to make my own using smatterings of each class and blog article I read. This is the result. Technics I have implemented here include:
 
-0. Helpers & Organization - First, it's a bit of a obvious statement but gulp is a Javascript tool so you can create reusable functions inside your <code>gulpfile.js</code>. Logging application progress and debugging information &amp; deleting files are operations that happen all over so why not DRY those aspects of your gulpfile up by creating reusable functions? Second, extracting the configuration including files locations and options passed to plugins can be extracted into a seperate <code>gulp.config.js</code> file. Third, loading all of the important gulp plugins ends up being quite a bit of dependency management - why not load the plugins dynamically, when needed, using the super handy [gulp-load-plugins](https://www.npmjs.com/package/gulp-load-plugins)? Plus when you use the gulp-load-plugins plugin you get to refer to plugins generically as <code>$</code> and after so much jQuery I kinda miss typing <code>$</code> and this really helps me feel better! Fourth, gulpif
-Fifth, gulp plumber
+0. Helpers & Organization - Lots of folks dislike gulp because it gets unweldy as the tasks pile up. Welcome to development. There is a reason it is complex. It's the nature of software. That said, there are a couple of things I have figured out to simplify were you can.
+*  It's a bit of a obvious statement but gulp is a Javascript tool so you can create reusable functions inside your <code>gulpfile.js</code>. Logging application progress and debugging information &amp; deleting files are operations that happen all over so why not DRY those aspects of your gulpfile up by creating reusable functions?
+*  Extracting the configuration including files locations and options passed to plugins can be extracted into a seperate <code>gulp.config.js</code> file. 
+*  Loading all of the important gulp plugins ends up being quite a bit of dependency management - why not load the plugins dynamically, when needed, using the super handy [gulp-load-plugins](https://www.npmjs.com/package/gulp-load-plugins)? Plus when you use the gulp-load-plugins plugin you get to refer to plugins generically as <code>$</code> and after so much jQuery I kinda miss typing <code>$</code> and this really helps me feel better! 
+*  Fourth, gulpif 
+*  Fifth, gulp plumber
+*  Listing tasks in your gulpfile should be built in - You are likely to be the only person using your gulpfile and other flat don't want to look into the file to figure out what the hell it does. Please do us all a favor by implementing the [gulp-task-listing](https://www.npmjs.com/package/gulp-task-listing) plugin and making it your default gulp task!
 
 1. Syntax checking with [JSHint](https://github.com/spalger/gulp-jshint) & [JSCS](https://github.com/jscs-dev/gulp-jscs) - I'm not a super big fan of syntax error checking in my dev tool. I like it at the command line so some of the functionality of JSHine and JSCS are lost on me. But that does NOT mean I don't like it at compile time. The ability to keep good style and syntax is great when integrated into the build task. 
 
@@ -14,3 +19,8 @@ Fifth, gulp plumber
 4. Serving a dev build with [gulp-nodemon](https://www.npmjs.com/package/gulp-nodemon) - All this building and transformation of your files makes it very important to preview the dev, qa AND production app locally. Luckily there is a nice little package that allows you to integrate a live server with automatic reloads when you change to source files. 
 
 5. Keeping your view in sync with your code using [BrowserSync](https://www.browsersync.io/) - Any tools that says "It's wicked-fast and totally free" gets my attention, wicked-fast regardless of what it does. But BrowserSync is useful - it updates your browser with the most up-to-date code that probably just modified. It also has a "ghost-mode" which enables you to do things like scroll in one browser and have all the other browsers connected to the BrowserSync session to do the same scrolling at the same time. Perhaps this is a bit gimmicky at first but when doing the holy grail of remote cross browser testing this really comes in handy!
+
+6. Building a production distribution with [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin), [del](https://github.com/sindresorhus/del) & vanilla [gulp](http://gulpjs.com/) - Squishing the size of images is worthy of some build code and that is exactly what [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin) does for us. No need for any additional gulp plugins to copy files around but the npm module <code>del</code> works like a champ to delete files using globbing patterns.
+
+
+ gua

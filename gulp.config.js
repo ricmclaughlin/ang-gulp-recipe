@@ -10,7 +10,8 @@ module.exports = function() {
       './src/**/*.js',
       './*.js'
     ],
-    client: client, 
+    client: client,
+    build: './build/', 
     index: client + 'index.html',
     js: [
       clientApp + '**/*.module.js',
@@ -18,6 +19,8 @@ module.exports = function() {
       '!' + clientApp + '**/*.spec.js'
     ],
     css: temp + 'styles.css',
+    fonts: './bower_components/font-awesome/fonts/**/*.*',
+    images: client + 'images/**/*.*',
     less: client + 'styles/styles.less',
     server: server,
     temp: temp,
