@@ -1,4 +1,4 @@
-Angular Gulp Recipe
+## Angular Gulp Recipe
 
 In the quest to build the ultimate Angular Gulpfile I worked through a couple of gulp classes and then set out to make my own using smatterings of each class and blog article I read. This is the result. Technics I have implemented here include:
 
@@ -12,3 +12,5 @@ Fifth, gulp plumber
 3. HTML, CSS & JS Injection with [wiredep](https://www.npmjs.com/package/wiredep) & [gulp-inject](https://www.npmjs.com/package/gulp-inject) - Automajically adding [bower](http://bower.io/) dependencies using an already-compatible-with-gulp [wiredep](https://www.npmjs.com/package/wiredep) makes this problem disappear. Combining and "injecting" CSS dependencies and JavaScript dependencies that YOU authored or added outside of bower in tools like [npm](https://www.npmjs.com/) is easily accomplished with [gulp-inject](https://github.com/klei/gulp-inject). The big advantage is that you no longer have to worry about wiring up all the dependencies in your base template - add your files to correct directory using the right tools and everything happens for you... easily.
 
 4. Serving a dev build with [gulp-nodemon](https://www.npmjs.com/package/gulp-nodemon) - All this building and transformation of your files makes it very important to preview the dev, qa AND production app locally. Luckily there is a nice little package that allows you to integrate a live server with automatic reloads when you change to source files. 
+
+5. Keeping your view in sync with your code using [BrowserSync](https://www.browsersync.io/) - Any tools that says "It's wicked-fast and totally free" gets my attention, wicked-fast regardless of what it does. But BrowserSync is useful - it updates your browser with the most up-to-date code that probably just modified. It also has a "ghost-mode" which enables you to do things like scroll in one browser and have all the other browsers connected to the BrowserSync session to do the same scrolling at the same time. Perhaps this is a bit gimmicky at first but when doing the holy grail of remote cross browser testing this really comes in handy!

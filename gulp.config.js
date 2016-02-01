@@ -20,7 +20,8 @@ module.exports = function() {
     css: temp + 'styles.css',
     less: client + 'styles/styles.less',
     server: server,
-    temp: temp,    
+    temp: temp,
+    browserReloadDelay: 1000,    
     bower: {
       json: require('./bower.json'),
       directory: './bower_components/',
