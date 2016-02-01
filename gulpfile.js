@@ -61,6 +61,21 @@ gulp.task('inject', function() {
     .pipe(gulp.dest(config.client));
 });
 
+gulp.task('serve-dev', ['inject'], function() {
+  var isDev = true;
+
+  var nodeOptions = {
+    script: config.nodeServer,
+    delayTime: 1,
+    env: {
+      'PORT': config.defaultPort,
+      'NODE_ENV': isDev ? 'dev' : 'build'
+    },
+    watch: [config.server]
+  }
+  return $.nodemon(nodeOptions);
+});
+
 /////
 
 function clean(path ) {
