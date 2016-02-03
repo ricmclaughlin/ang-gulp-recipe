@@ -22,5 +22,5 @@ In the quest to build the ultimate Angular Gulpfile I worked through a couple of
 
 6. Building a production distribution with [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin), [del](https://github.com/sindresorhus/del) & vanilla [gulp](http://gulpjs.com/) - Squishing the size of images is worthy of some build code and that is exactly what [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin) does for us. No need for any additional gulp plugins to copy files around but the npm module <code>del</code> works like a champ to delete files using globbing patterns.
 
-
+7. Angular Template Caching with [gulp-angular-templatecache](https://github.com/miickel/gulp-angular-templatecache) & [gulp-minify-html](https://www.npmjs.com/package/gulp-minify-html) - Template caching, which is simply the ability to cache chunks of HTML client side to reduce the number of HTTP requests, is a serious pain without a tool to help you manage it. These two plugins do great job of doing just that - make things faster in your AngularJS app.
  gua

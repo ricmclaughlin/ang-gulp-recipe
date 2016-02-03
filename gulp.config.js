@@ -20,10 +20,20 @@ module.exports = function() {
     ],
     css: temp + 'styles.css',
     fonts: './bower_components/font-awesome/fonts/**/*.*',
+    htmltemplates: clientApp + '**/*.html',
     images: client + 'images/**/*.*',
     less: client + 'styles/styles.less',
     server: server,
     temp: temp,
+
+    templateCache: {
+      file: 'templates.js',
+      options: {
+        module: 'app.core',
+        standAlone: false,
+        root: 'app/'
+      }
+    },
     browserReloadDelay: 1000,    
     bower: {
       json: require('./bower.json'),
