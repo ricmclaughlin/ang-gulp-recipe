@@ -108,7 +108,7 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(config.client));
 });
 
-gulp.task('inject', function() {
+gulp.task('inject', ['wiredep', 'styles', 'templatecache'],function() {
   log('wireup the app centric css & js');
    
   return gulp
@@ -118,8 +118,31 @@ gulp.task('inject', function() {
     .pipe(gulp.dest(config.client));
 });
 
+gulp.task('optimize', ['inject'], function() {
+  log('optimize process started');
+  // var assets = $.useref.assets();
+  var templateCache = config.temp + config.templateCache.file;
+ 
+
+  return gulp
+    .src(config.index)
+    .pipe($.plumber())
+    .pipe($.inject(gulp.src(templateCache, {read: false}), {
+      starttag: '<!-- inject:template.js -->'
+    }))
+    .pipe($.useref({searchPath: './'}))
+    .pipe(gulp.dest(config.build));
+});
+
+gulp.task('serve-build', ['optimize'], function() {
+  serve(false);
+});
+
 gulp.task('serve-dev', ['inject'], function() {
-  var isDev = true;
+  serve(true);
+});
+
+function serve(isDev) {
 
   var nodeOptions = {
     script: config.nodeServer,
@@ -150,18 +173,29 @@ gulp.task('serve-dev', ['inject'], function() {
     .on('exit', function() {
       log('*** nodemon exited cleanly!')
     });
-});
+}
 
-function startBrowserSync() {
+function startBrowserSync(isDev) {
   if(args.no-sync || browserSync.active) {
     return;
   }
   log('Starting up browserSync on port ' + port);
-  
+  if(isDev) {
+    gulp.watch([config.less], ['styles'])
+      .on('change', function(event) { changeEvent(event); });
+  } else {
+    gulp.watch([config.less, config.js, config.html], ['optimize', browserSync.reload])
+      .on('change', function(event) { changeEvent(event); });
+  }
+
   var options = {
     proxy: 'localhost:' + port,
     port: 3000,
-    files: [config.client + '**/*.*'],
+    files: isDev ? [
+      config.client + '**/*.*',
+      '!' + config.less,
+      config.temp + '**/*.css'
+      ] : [],
     ghostMode: {
       clicks: true,
       location: false,
