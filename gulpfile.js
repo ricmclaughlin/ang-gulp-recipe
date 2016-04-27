@@ -108,7 +108,7 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(config.client));
 });
 
-gulp.task('inject', ['wiredep', 'styles', 'templatecache'],function() {
+gulp.task('inject', ['wiredep', 'styles', 'images', 'templatecache'],function() {
   log('wireup the app centric css & js');
    
   return gulp
@@ -120,16 +120,18 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'],function() {
 
 gulp.task('optimize', ['inject'], function() {
   log('optimize process started');
-  // var assets = $.useref.assets();
+  var cssFilter = $.filter(config.client + '**/*.css', { restore: true });
   var templateCache = config.temp + config.templateCache.file;
  
-
   return gulp
     .src(config.index)
     .pipe($.plumber())
     .pipe($.inject(gulp.src(templateCache, {read: false}), {
       starttag: '<!-- inject:template.js -->'
     }))
+    .pipe(cssFilter)
+    .pipe($.csso())
+    .pipe(cssFilter.restore)
     .pipe($.useref({searchPath: './'}))
     .pipe(gulp.dest(config.build));
 });

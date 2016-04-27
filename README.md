@@ -1,14 +1,6 @@
 ## Angular Gulp Recipe
 
-In the quest to build the ultimate Angular Gulpfile I worked through a couple of gulp classes and then set out to make my own using smatterings of each class and blog article I read. This is the result. Technics I have implemented here include:
-
-0. Helpers & Organization - Lots of folks dislike gulp because it gets unweldy as the tasks pile up. Welcome to development. There is a reason it is complex. It's the nature of software. That said, there are a couple of things I have figured out to simplify were you can.
-*  It's a bit of a obvious statement but gulp is a Javascript tool so you can create reusable functions inside your <code>gulpfile.js</code>. Logging application progress and debugging information &amp; deleting files are operations that happen all over so why not DRY those aspects of your gulpfile up by creating reusable functions?
-*  Extracting the configuration including files locations and options passed to plugins can be extracted into a seperate <code>gulp.config.js</code> file. 
-*  Loading all of the important gulp plugins ends up being quite a bit of dependency management - why not load the plugins dynamically, when needed, using the super handy [gulp-load-plugins](https://www.npmjs.com/package/gulp-load-plugins)? Plus when you use the gulp-load-plugins plugin you get to refer to plugins generically as <code>$</code> and after so much jQuery I kinda miss typing <code>$</code> and this really helps me feel better! 
-*  Fourth, [gulpif](https://github.com/robrich/gulp-if) allows you to conditionally control the low of vinyl objects - which translates into tons of fantastic filtering in your gulp tasks.
-*  Fifth, [gulp-plumber](https://github.com/floatdrop/gulp-plumber) is a [monkey patch](https://en.wikipedia.org/wiki/Monkey_patch) that continues the <code>gulp.pipe</code> if an error occurs in the execution of a <code>.pipe</code>'d command. Handy all over gulp files. Not convinced? This is what sealed the ["convincing to for me"](https://gist.github.com/floatdrop/8269868)
-*  Listing tasks in your gulpfile should be built in - You are likely to be the only person using your gulpfile and other flat don't want to look into the file to figure out what the hell it does. Please do us all a favor by implementing the [gulp-task-listing](https://www.npmjs.com/package/gulp-task-listing) plugin and making it your default gulp task!
+In the quest to build the ultimate Angular Gulpfile I worked through a couple of gulp classes and then set out to make my own using smatterings of each class and blog article I have read. This is the result. Technics I have implemented here include:
 
 1. Syntax checking with [JSHint](https://github.com/spalger/gulp-jshint) & [JSCS](https://github.com/jscs-dev/gulp-jscs) - I'm not a super big fan of syntax error checking in my dev tool. I like it at the command line so some of the functionality of JSHine and JSCS are lost on me. But that does NOT mean I don't like it at compile time. The ability to keep good style and syntax is great when integrated into the build task. 
 
@@ -25,4 +17,6 @@ In the quest to build the ultimate Angular Gulpfile I worked through a couple of
 7. Angular Template Caching with [gulp-angular-templatecache](https://github.com/miickel/gulp-angular-templatecache) & [gulp-minify-html](https://www.npmjs.com/package/gulp-minify-html) - Template caching, which is simply the ability to cache chunks of HTML client side to reduce the number of HTTP requests, is a serious pain without a tool to help you manage it. These two plugins do great job of doing just that - make things faster in your AngularJS app.
 
 8. Optimizing a production build with [gulp-useref](https://www.npmjs.com/package/gulp-useref) - Reducing the number of HTTP requests to load included files is easily accomplished using <code>gulp-useref</code> - version 3 of this plugin has greatly simplified implementation but most examples using gulp-useref haven't been updated to the newer syntax. Be warned! 
+
+9. Minimize CSS & JS with [gulp-csso](https://github.com/ben-eb/gulp-csso) & [gulp-uglify] - 
 
